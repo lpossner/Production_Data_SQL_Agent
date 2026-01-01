@@ -49,12 +49,12 @@ The system manages four key tables:
     User Question (Natural Language)
                 ↓
          ┌──────────────┐
-         │ LangGraph    │
-         │ Agent        │
+         │  LangGraph   │
+         │  Agent       │
          └──────────────┘
                 ↓
          ┌──────────────┐
-         │     Tool     │
+         │  Tool        │
          │  Selection   │
          └──────────────┘
                 ↓
@@ -126,51 +126,39 @@ A: Ja, mehrere Fehler traten auf:
    - Machine-006: Überhitzung (28.05.2025)
 ```
 
-## Setup
+## Installation
 
-### Prerequisites
+### 1. Clone the Repository
+```bash
+git clone https://github.com/lpossner/Production-Data-SQL-Agent.git
+cd Production-Data-SQL-Agent
+```
+
+### 2. Install Dependencies
 
 ```bash
-pip install langchain langchain-openai langchain-community langgraph sqlite3 faker
+pip install uv
+uv sync
 ```
 
-### Configuration
-
-1. Set up your OpenAI API credentials
-2. Initialize the LLM and embeddings in the notebook:
-
-```python
-from langchain_openai import ChatOpenAI, OpenAIEmbeddings
-
-llm = ChatOpenAI(
-    # Add your configuration here
-)
-
-embeddings = OpenAIEmbeddings(
-    # Add your configuration here
-)
-```
-
-### Database Generation
-
-The notebook includes a complete database setup script that generates:
-- 10 machines with realistic specifications
-- 1,000 production orders
-- 500 error logs
-- 50 maintenance plans
-
-Run the first cell to create `industrial_process.db` with sample data.
+### 3. Configure OpenAI API
+Set up your OpenAI API credentials in the notebook or as environment variables.
 
 ## Usage
 
-Open [gqw_2015.ipynb](gqw_2015.ipynb) and run the cells sequentially:
+The workflow consists of three main steps:
 
-1. **Database Setup**: Creates and populates the SQLite database
-2. **LLM Configuration**: Initialize your language model and embeddings
-3. **Vector Store Setup**: Extracts distinct values for fuzzy matching
-4. **Tool Configuration**: Sets up SQL and retriever tools
-5. **Agent Creation**: Builds the ReAct agent with memory
-6. **Example Queries**: Run conversational queries
+### 1. Initialize the Database
+Run the database setup cells in the notebook to generate sample industrial production data:
+```bash
+jupyter notebook gqw_2015.ipynb
+```
+
+### 2. Configure LLM and Embeddings
+Set up your OpenAI language model and embeddings in the notebook configuration cells.
+
+### 3. Query the Database
+Use natural language queries in English or German to interact with the production data through the SQL agent.
 
 ## Key Components
 
@@ -225,8 +213,4 @@ LIMIT 3;
 
 ## License
 
-This project is provided as-is for educational and demonstration purposes.
-
-## Contributing
-
-Feel free to open issues or submit pull requests to improve the agent's capabilities or add new features.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
