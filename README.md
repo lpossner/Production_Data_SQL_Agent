@@ -46,22 +46,37 @@ The system manages four key tables:
 ## Architecture
 
 ```
-User Question (Natural Language)
-         ↓
-    LangGraph Agent
-         ↓
-    ┌────────────────┐
-    │  Tool Selection │
-    └────────────────┘
-         ↓
-    ┌─────────────────────────────────┐
-    │ SQL Tools        │ Retriever    │
-    │ - List Tables    │ - Search     │
-    │ - Get Schema     │   Values     │
-    │ - Query Checker  │              │
-    │ - Execute Query  │              │
-    └─────────────────────────────────┘
-         ↓
+    User Question (Natural Language)
+                ↓
+         ┌──────────────┐
+         │ LangGraph    │
+         │ Agent        │
+         └──────────────┘
+                ↓
+         ┌──────────────┐
+         │     Tool     │
+         │  Selection   │
+         └──────────────┘
+                ↓
+         ┌──────────────┐
+         │  SQL Tools   │
+         │──────────────│
+         │ - List       │
+         │   Tables     │
+         │ - Get Schema │
+         │ - Query      │
+         │   Checker    │
+         │ - Execute    │
+         │   Query      │
+         └──────────────┘
+                ↓
+         ┌──────────────┐
+         │  Retriever   │
+         │──────────────│
+         │ - Search     │
+         │   Values     │
+         └──────────────┘
+                ↓
     Natural Language Response
 ```
 
